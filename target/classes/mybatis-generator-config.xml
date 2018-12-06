@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 本地数据库驱动jar包的全路径-->
+    <classPathEntry location="D:\workspace\SSMframe\src\main\webapp\WEB-INF\lib\mysql-connector-java-5.1.44-bin.jar"/>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+       <commentGenerator>
+           <!--是否生成时间戳-->
+           <property name="suppressDate" value="true"/>
+           <!--是否去除自动生成的注释 true:是：false:否-->
+           <property name="suppressAllComments" value="true"/>
+       </commentGenerator>
+        <!-- 数据连接url,用户名，密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/kevin" userId="root" password="root"/>
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和  NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.privates.kevin.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="com.privates.kevin.mapper.xml" targetProject="src/main/java">
+            <property name="enableSubpackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.privates.kevin.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <table tableName="person" domainObjectName="Person"
+               enableUpdateByExample="false"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>
