@@ -276,6 +276,14 @@
       <artifactId>jackson-annotations</artifactId>
       <version>2.9.6</version>
     </dependency>
+    <!--xstream.xml用在转换数据以xml的形式-->
+    <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.4.11.1</version>
+    </dependency>
+
     <!--json和xml互转的jar包 -->
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-jaxb-annotations -->
     <dependency>
@@ -310,7 +318,7 @@
   </dependencies>
 
   <build>
-    <finalName>SSMframe</finalName>
+    <finalName>kevin</finalName>
     <!-- maven无法对xml文件进行编译打包，须在pom.xml文件中添加如下配置：-->
     <resources>
       <resource>

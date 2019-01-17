@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:Spring-myBatis.xml"})
+@ContextConfiguration(locations = {"classpath:Spring-context.xml"})
 public class personTest {
     private static Logger logger=Logger.getLogger(personTest.class);
     @Autowired

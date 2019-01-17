@@ -10,7 +10,7 @@
     <!-- Spring和Mybatis的配置文件-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:Spring-myBatis.xml</param-value>
+        <param-value>classpath*:Spring-context*.xml</param-value>
     </context-param>
     <!--Log4j配置-->
     <context-param>
@@ -48,6 +48,10 @@
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
         </init-param>
     </filter>
     <filter-mapping>

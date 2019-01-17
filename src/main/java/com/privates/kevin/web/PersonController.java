@@ -12,6 +12,17 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
     @Autowired
     private PersonService personService;
+    @ModelAttribute
+    public Person get(@RequestParam(required = false) String id){
+
+        if(id==null){
+            return new Person();
+        }else{
+            Person person=personService.get(id);
+            return person;
+        }
+    }
+
 
     @RequestMapping(value = "show",method = RequestMethod.GET)
     @ResponseBody
@@ -20,4 +31,9 @@ public class PersonController {
         Person p=personService.selectData();
         return p;
     }
+    @RequestMapping("Info")
+    public String Info(){
+        return "Person";
+    }
+
 }

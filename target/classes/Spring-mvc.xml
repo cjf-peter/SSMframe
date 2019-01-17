@@ -10,7 +10,61 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <!--springMvc注解开启 -->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+        <mvc:message-converters>
+            <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+            </bean>
+            <!-- 将Jackson2HttpMessageConverter的默认格式化输出为false -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <!--处理responseBody里面的日期类型-->
+                        <!--<property name="dateFormat">-->
+                            <!--<bean class="java.text.SimpleDateFormat">-->
+                                <!--<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />-->
+                            <!--</bean>-->
+                        <!--</property>-->
+                        <!--为null字段时不显示-->
+                        <property name="serializationInclusion">
+                            <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+                        </property>
+                        <property name="propertyNamingStrategy">
+                            <bean class="com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy"/>
+                        </property>
+                    </bean>
+                </property>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <!--配置xml数据的解析-->
+            <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+                <constructor-arg>
+                    <bean class="org.springframework.oxm.xstream.XStreamMarshaller">
+                            <property name="streamDriver">
+                                <bean class="com.thoughtworks.xstream.io.xml.StaxDriver"/>
+                            </property>
+                        <!--需要添加相应映射的地址
+                        例 <property name="annotatedClasses">
+                        <List><value>com.privates.kevin.XX</value><List>
+                        </property-->
+                    </bean>
+                </constructor-arg>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/xml;charset=UTF-8</value>
+                        <value>text/xml;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     <!--静态资源映射 -->
     <mvc:default-servlet-handler/>
     <!-- 内容协商管理器-->

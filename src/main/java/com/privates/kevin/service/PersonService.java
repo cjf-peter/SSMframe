@@ -17,4 +17,7 @@ public class PersonService {
         return personMapper.selectByPrimaryKey(1);
     }
 
+    public Person get(String id) {
+        return personMapper.selectByPrimaryKey(Integer.valueOf(id));
+    }
 }
