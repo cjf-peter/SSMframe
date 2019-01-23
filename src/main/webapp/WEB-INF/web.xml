@@ -13,6 +13,10 @@
         <param-value>classpath*:Spring-context*.xml</param-value>
     </context-param>
     <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log4j2.xml</param-value>
+    </context-param>
+    <context-param>
         <param-name>webAppRootKey</param-name>
         <param-value>webApp.root</param-value>
     </context-param>

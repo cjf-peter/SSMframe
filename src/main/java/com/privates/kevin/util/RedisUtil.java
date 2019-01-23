@@ -4,7 +4,11 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-public class RedisUtil {
+import java.io.Serializable;
+
+public class RedisUtil implements Serializable {
+    private static final long serialVersionUID = -1149678082569464779L;
+
     //redis地址
     private static String ADDR="127.0.0.1";
     //redis的端口号

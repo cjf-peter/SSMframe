@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("message")
 public class PersonController {
 
-//    public static final Logger logger= LogManager.getLogger(PersonController.class);
+    public static final Logger logger= LogManager.getLogger(PersonController.class);
 
     @Autowired
     private PersonService personService;
@@ -32,7 +32,7 @@ public class PersonController {
     @RequestMapping(value = "show",method = RequestMethod.GET)
     @ResponseBody
     public Person GetMessage(@RequestParam("id") String id){
-        System.out.println("当前id"+id);
+        logger.info("当前id"+id);
         Person p=personService.selectData();
         return p;
     }

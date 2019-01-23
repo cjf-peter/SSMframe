@@ -1,8 +1,12 @@
 package com.privates.kevin.util;
 
 import org.apache.ibatis.cache.Cache;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.springframework.data.redis.connection.jedis.JedisConnection;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
@@ -14,7 +18,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public  class RedisCache implements Cache {
 
-    private static final Logger logger= LoggerFactory.getLogger(RedisCache.class);
+    private static final Logger logger= LogManager.getLogger(RedisCache.class);
     private static JedisConnectionFactory jedisConnectionFactory;
     private final String id;
 
@@ -37,7 +41,19 @@ public  class RedisCache implements Cache {
 
     @Override
     public void putObject(Object key, Object value) {
-
+        JedisConnection connection=null;
+        try{
+            connection=jedisConnectionFactory.getConnection();
+            RedisSerializer<Object> serializer=new JdkSerializationRedisSerializer();
+            connection.set(serializer.serialize(key),serializer.serialize(value));
+            logger.debug("存放到Redis内存数据库的数据key:"+key+",value:"+value);
+        }catch (JedisConnectionException e){
+            e.printStackTrace();
+        }finally{
+            if(connection!=null){
+                connection.close();
+            }
+        }
     }
 
     @Override

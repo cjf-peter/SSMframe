@@ -1,4 +1,4 @@
-package com.privates.kevin.web;
+package com.privates.kevin.util;
 
 import com.privates.kevin.util.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -64,7 +64,6 @@
         <property name="testOnBorrow" value="${redis.testonBorrow}"/>
     </bean>
 
-    <!--配置JedisConnectionFactory-->
     <!-- 配置JedisConnectionFacory -->
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <property name="hostName" value="${redis.hostName}" />
@@ -75,7 +74,7 @@
     </bean>
 
     <!--使用中间类解决RedisCache.jedisConnectionFactory的静态注入，从而使MyBatis实现第三方缓存-->
-    <bean id="redisCacheTransfer" class="com.privates.kevin.web.RedisCacheTransfer">
+    <bean id="redisCacheTransfer" class="com.privates.kevin.util.RedisCacheTransfer">
         <property name="jedisConnectionFactory" ref="jedisConnectionFactory"/>
     </bean>
 
@@ -98,13 +97,6 @@
     <!-- 配置RedisCacheManager -->
     <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg index="0" ref="redisTemplate" />
-    </bean>
-
-    <!-- 配置RedisCacheConfig -->
-    <bean id="redisCacheConfig" class="com.privates.kevin.service.RedisCacheConfig">
-        <constructor-arg ref="jedisConnectionFactory" />
-        <constructor-arg ref="redisTemplate" />
-        <constructor-arg ref="redisCacheManager" />
     </bean>
 
 
