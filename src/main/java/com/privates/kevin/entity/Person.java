@@ -1,6 +1,11 @@
 package com.privates.kevin.entity;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
+
+    private static final long serialVersionUID=-5366358304131939882L;
+
     private Integer id;
 
     private String name;

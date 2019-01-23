@@ -2,6 +2,8 @@ package com.privates.kevin.web;
 
 import com.privates.kevin.entity.Person;
 import com.privates.kevin.service.PersonService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("message")
 public class PersonController {
+
+//    public static final Logger logger= LogManager.getLogger(PersonController.class);
+
     @Autowired
     private PersonService personService;
     @ModelAttribute
